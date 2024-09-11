@@ -2126,7 +2126,8 @@ namespace Scada.Server.Engine
             lock (users)
             {
                 if (users.TryGetValue(username.Trim().ToLowerInvariant(), out User user) &&
-                    (string.IsNullOrEmpty(password) || password == user.Password))
+                    !string.IsNullOrEmpty(password) && password == user.Password)
+                    //(string.IsNullOrEmpty(password) || password == user.Password))
                 {
                     roleID = user.RoleID;
                     return true;
